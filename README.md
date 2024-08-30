@@ -15,8 +15,34 @@ Like human social life, people who have a high social ranking (have many friends
 
 ![image](https://github.com/user-attachments/assets/2dbe3b80-af50-43af-9c2e-c5b57113c406)
 
+# Attribute
 
+There are several attributes used in the implementation of the PeopleRank algorithm such as:
+- **dampingFactor** is a constant in measuring the value of PeopleRank
+- **threshold** is used to give a time limit to meet nodes until they can become friends
+- **peopleRank** is the PeopleRank value in the node
+- **startTime** is a folder with key of type DTNHost and value of type double that is used to store the start time of each host node and the same peer meeting
+- **connectionHistory** is a Map with a key of type DTNHost and a value of type List Duration used to store the history of encounters between the host and its peers
+- **friends** is a Map with key of type DTNHost and value of type Tuple containing Integer and Double. This is used to store information about each of the host's peers, and will be used to calculate and PeopleRank value.
 
+# Pseudocode
+
+```
+  while true do
+    while i is in contact with j do
+        if j ∈ F(i) then
+            send(PeR(i), |F(i)|)
+            receive(PeR(j), |F(j)|)
+            update(PeR(i))
+        end if
+        while ∃ m ∈ buffer(i) do
+            if PeR(j) ≥ to PeR(i) OR j = destination(m) then
+                Forward(m, j)
+            end if
+        end while
+    end while
+  end while
+```
 
 
 
